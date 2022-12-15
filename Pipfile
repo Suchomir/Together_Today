@@ -7,6 +7,10 @@ name = "pypi"
 flask = "*"
 pylint = "*"
 flask-sqlalchemy = "*"
+flask-login = "*"
+nodeenv = "*"
+wtforms = "*"
+flask-migrate = "*"
 
 [dev-packages]
 

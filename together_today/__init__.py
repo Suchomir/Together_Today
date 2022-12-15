@@ -2,7 +2,7 @@
 
 import os
 from flask import Flask
-from flask_debugtoolbar import DebugToolbarExtension
+#from flask_debugtoolbar import DebugToolbarExtension
 from flask_migrate import Migrate, upgrade
 from flask_login import LoginManager
 
@@ -13,8 +13,7 @@ def create_app(config="together_today.config.Config"):
     with app.app_context():
         app.config.from_object(config)
 
-        toolbar = DebugToolbarExtension()
-        toolbar.init_app(app)
+    
 
         # pylint: disable=import-outside-toplevel
         from together_today.models import db
@@ -34,12 +33,9 @@ def create_app(config="together_today.config.Config"):
             return User.query.get(int(user_id))
 
         # pylint: disable=import-outside-toplevel
-        from together_today.views import general, auth, admin, profile, post
+        from together_today.views import general
 
         app.register_blueprint(general)
-        app.register_blueprint(auth)
-        app.register_blueprint(admin)
-        app.register_blueprint(profile)
-        app.register_blueprint(post)
+       
 
     return app

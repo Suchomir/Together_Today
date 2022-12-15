@@ -1,4 +1,3 @@
-#EDIT
 from together_today import create_app
 
 app = create_app()
