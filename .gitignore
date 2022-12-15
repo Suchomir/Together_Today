@@ -89,4 +89,4 @@ node_modules
 fakebook/uploads/**/*
 
 #mine
-notes.txt
+#notes.txt
