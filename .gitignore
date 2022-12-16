@@ -82,11 +82,11 @@ cython_debug/
 # Node
 node_modules
 
-# Fakebook
+# together_today
 *.db
 *.sqlite3
-.fakebook_secret_key
-fakebook/uploads/**/*
+.together_today_secret_key
+together_today/uploads/**/*
 
 #mine
 #notes.txt
