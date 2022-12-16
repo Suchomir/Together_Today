@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block title %}
+  Log In
+{% endblock %}
+
+
+{% block content %}
+  <div class="container mx-auto">
+
+    <div class="max-w-md mx-auto">
+      {% include '_partials/form_errors.html' %}
+
+      <form action="{{ url_for('auth.login') }}" method="POST">
+        {{ form.hidden_tag() }}
+
+        <div class="mt-4">
+          {{ form.username.label(class="block mb-2 text-sm font-medium text-gray-900") }}
+          {{ form.username(class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full p-2.5") }}
+
+          {% for error in form.username.errors %}
+            <p class="mt-2 text-sm text-red-600">{{ error }}</p>
+          {% endfor %}
+        </div>
+
+        <div class="mt-4">
+          {{ form.password.label(class="block mb-2 text-sm font-medium text-gray-900") }}
+          {{ form.password (class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full p-2.5") }}
+          {% for error in form.password.errors %}
+            <p class="mt-2 text-sm text-red-600">{{ error }}</p>
+          {% endfor %}
+        </div>
+
+        <div class="mt-4">
+          {{ form.submit (class="w-full text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm w-full px-5 py-2.5 text-center cursor-pointer") }}
+        </div>
+      </form>
+      <small class="mt-4 mx-auto">Don't have an account? <a
+        class="text-red-400"
+        href="{{ url_for('auth.register') }}"
+      >Register here</a></small>
+    </div>
+  </div>
+
+{% endblock %}

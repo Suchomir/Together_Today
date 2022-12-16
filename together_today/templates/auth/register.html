@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+
+{% block title %}
+  Register
+{% endblock %}
+
+{% block content %}
+  <div class="container mx-auto">
+
+    <div class="max-w-md mx-auto">
+      {% include '_partials/form_errors.html' %}
+
+      <form action="{{ url_for('auth.register') }}" method="POST" enctype="multipart/form-data">
+        {{ form.hidden_tag() }}
+
+        <div class="mt-4">
+          {{ form.first_name.label(class="block mb-2 text-sm font-medium text-gray-900") }}
+          {{ form.first_name(class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full p-2.5" ) }}
+
+          {% for error in form.first_name.errors %}
+            <p class="mt-2 text-sm text-red-600">{{ error }}</p>
+          {% endfor %}
+        </div>
+
+        <div class="mt-4">
+          {{ form.last_name.label(class="block mb-2 text-sm font-medium text-gray-900") }}
+          {{ form.last_name(class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full p-2.5") }}
+
+          {% for error in form.last_name.errors %}
+            <p class="mt-2 text-sm text-red-600">{{ error }}</p>
+          {% endfor %}
+        </div>
+
+        <div class="mt-4">
+          {{ form.username.label(class="block mb-2 text-sm font-medium text-gray-900") }}
+          {{ form.username(class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full p-2.5") }}
+
+          {% for error in form.username.errors %}
+            <p class="mt-2 text-sm text-red-600">{{ error }}</p>
+          {% endfor %}
+        </div>
+
+        <div class="mt-4">
+          {{ form.picture.label(class="block mb-2 text-sm font-medium text-gray-900") }}
+          {{ form.picture(class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500
+          focus:border-red-500 block w-full p-2.5") }}
+        
+          {% for error in form.picture.errors %}
+            <p class="mt-2 text-sm text-red-600">{{ error }}</p>
+          {% endfor %}
+        </div>
+
+        <div class="mt-4">
+          {{ form.password.label(class="block mb-2 text-sm font-medium text-gray-900") }}
+          {{ form.password(class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full p-2.5") }}
+
+          {% for error in form.password.errors %}
+            <p class="mt-2 text-sm text-red-600">{{ error }}</p>
+          {% endfor %}
+        </div>
+
+        <div class="mt-4">
+          {{ form.confirm_password.label(class="block mb-2 text-sm font-medium text-gray-900") }}
+          {{ form.confirm_password(class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full p-2.5") }}
+
+          {% for error in form.confirm_password.errors %}
+            <p class="mt-2 text-sm text-red-600">{{ error }}</p>
+          {% endfor %}
+        </div>
+
+        <div class="mt-4">
+          {{ form.submit (class="w-full text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm w-full px-5 py-2.5 text-center cursor-pointer") }}
+        </div>
+      </form>
+
+      <small class="mt-4 mx-auto">Already have an account?
+        <a class="text-red-400" href="{{ url_for('auth.login') }}">Log In here</a>
+      </small>
+    </div>
+  </div>
+
+
+{% endblock %}

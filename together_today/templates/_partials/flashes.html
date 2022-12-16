@@ -1,0 +1,36 @@
+{% with messages = get_flashed_messages(with_categories=true) %}
+  {% for category, message in messages %}
+
+    {% if category == "error" %}
+      {% set div_classes = "bg-red-100 border-red-400 text-red-700" %}
+      {% set icon_classes = "text-red-500" %}
+      {% set text = "Error!" %}
+    {% endif %}
+
+    {% if category == "success" %}
+      {% set div_classes = "bg-green-100 border-green-400 text-green-700" %}
+      {% set icon_classes = "text-green-500" %}
+      {% set text = "Success!" %}
+    {% endif %}
+
+    {% if category == "warning" %}
+      {% set div_classes = "bg-yellow-100 border-yellow-400 text-yellow-700" %}
+      {% set icon_classes = "text-yellow-500" %}
+      {% set text = "Warning" %}
+    {% endif %}
+
+    {% if category == "info" %}
+      {% set div_classes = "bg-blue-100 border-blue-400 text-blue-700" %}
+      {% set icon_classes = "text-blue-500" %}
+      {% set text = "Info" %}
+    {% endif %}
+
+    <div class="border px-4 py-3 rounded relative {{ div_classes }}" id="alert-{{ loop.counter }}">
+      <strong class="font-bold">{{ text }}</strong>
+      <span class="block sm:inline">{{ message }}</span>
+      <button class="absolute top-0 bottom-0 right-0 px-4 py-3" data-dismiss-target="#alert-{{ loop.counter }}">
+        <i class="h-6 w-6 fa-solid fa-circle-xmark {{ icon_classes }}"></i>
+      </button>
+    </div>
+  {% endfor %}
+{% endwith %}
