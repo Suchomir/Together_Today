@@ -17,22 +17,23 @@
       
         {% if current_user.is_authenticated %}
           <li>
-            <a href="{{ url_for('profile.single_profile', username=current_user.username) }}"
+            <a href="#"
                class="{{ active_classes if request.url_rule.endpoint == "profile.single_profile" else default_classes }}">
               Your Profile
             </a>
           </li>
         {% endif %}
 
-        {% if not current_user.is_authenticated %}
-          <a href="{{ url_for('auth.login') }}"
-            class="px-6 py-3 text-white bg-[#CE7BB0] rounded-full hover:bg-violet-400 hover:text-white-200 ">Log In</a>
-        {% endif %}
 
         {% if current_user.is_authenticated %}
           <a href="{{ url_for('auth.logout') }}"
-            class="px-6 py-3 text-white bg-[#CE7BB0] rounded-full hover:bg-violet-400 hover:text-white-200 ">Log Out</a>
+            class="px-6 py-3 text-white bg-pink-300 rounded-full hover:bg-pink-400 hover:text-white-200 w-28 flex justify-center">Log Out</a>
         {% endif %}
+
+        <a href="{{ url_for('auth.logout') }}"
+          class="px-6 py-3 text-white bg-pink-300 rounded-full hover:bg-pink-400 hover:text-white-200 w-28 flex justify-center">Log
+          Out</a>
+
 
         {% if current_user.is_authenticated and current_user.is_admin %}
           <li>
@@ -53,10 +54,7 @@
         </li>
         {% endif %}
 
-        {% if not current_user.is_authenticated %}
-          <a href="{{ url_for('auth.register') }}"
-            class="ml-6 px-6 py-3 text-white bg-[#CE7BB0] rounded-full hover:bg-violet-400 hover:text-white-200 ">Register</a>
-        {% endif %}
+     
      
     </div>
   </div>

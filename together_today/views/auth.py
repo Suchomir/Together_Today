@@ -36,7 +36,7 @@ def login():
 
                 return redirect(
                     url_for(
-                        "profile.single_profile",
+                        "general.index",
                         username=current_user.username,
                     )
                 )
