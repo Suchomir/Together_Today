@@ -1,33 +1,20 @@
-<nav class="bg-white border-gray-200 px-2 sm:px-4 py-2.5 rounded">
+<nav class="bg-[#A267AC] px-2 sm:px-4 py-3 rounded">
   <div class="container flex flex-wrap justify-between items-center mx-auto">
-    <a href="{{ url_for('general.index') }}" class="flex items-center">
-      <img src="{{ url_for('static', filename='img/logo.png') }}" class="mr-3 h-6 sm:h-9" alt="Together Today Logo" />
-      <span class="self-center text-xl font-semibold whitespace-nowrap">Together Today</span>
-    </a>
-    <div class="hidden justify-between items-center w-full md:flex md:w-auto md:order-1" id="navbar-search">
-      <div class="relative mt-3 md:hidden">
-        <form action="/search">
-          <div class="relative">
-            <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
-              <i class="fa-solid fa-magnifying-glass"></i>
-            </div>
-            <label for="search" class="hidden sr-only">Search</label>
-            <input name="query" type="search" id="search"
-                   class="block p-2 pl-10 w-full text-gray-900 bg-gray-50 rounded-lg border border-gray-300 sm:text-sm focus:ring-red-500 focus:border-red-500"
-                   placeholder="Search" required>
-            <button type="submit"
-                    class="text-white absolute right-[0.55rem] bottom-[0.55rem] bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-2 py-0.5">
-              Search
-            </button>
-          </div>
-        </form>
-      </div>
 
+  
+      <a href="{{ url_for('general.index') }}" class="flex items-center">
+        <img src="{{ url_for('static', filename='img/hearts_logo.png') }}" class="mr-3 h-6 sm:h-9" alt="Together Today Logo" />
+        <span class="self-center text-xl font-semibold ">T<img src="{{ url_for('static', filename='img/heart_icon.png') }}" alt="heart_icon.png" class="w-4 h-4 inline mx-0.5">gether 
+          T<img src="{{ url_for('static', filename='img/heart_icon.png') }}" alt="heart_icon.png" class="w-4 h-4 inline mx-0.5">day</span>
+      </a>
+  
+
+    <div class="hidden justify-between items-center w-full md:flex md:w-auto md:order-1" id="navbar-search">
+  
       {% set active_classes='block py-2 pr-4 pl-3 text-white bg-red-700 rounded md:bg-transparent md:text-red-500 md:p-0' %}
       {% set default_classes='block py-2 pr-4 pl-3 text-gray-700 md:bg-transparent md:text-gray-700 md:hover:text-red-500 md:p-0' %}
 
-      <ul
-        class="flex flex-col p-4 mt-4 bg-gray-50 rounded-lg border border-gray-100 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium md:border-0 md:bg-white">
+      
         {% if current_user.is_authenticated %}
           <li>
             <a href="{{ url_for('profile.single_profile', username=current_user.username) }}"
@@ -38,17 +25,13 @@
         {% endif %}
 
         {% if not current_user.is_authenticated %}
-          <li>
-            <a href="{{ url_for('auth.login') }}"
-               class="{{ default_classes }}">Log In</a>
-          </li>
+          <a href="{{ url_for('auth.login') }}"
+            class="px-6 py-3 text-white bg-[#CE7BB0] rounded-full hover:bg-violet-400 hover:text-white-200 ">Log In</a>
         {% endif %}
 
         {% if current_user.is_authenticated %}
-          <li>
-            <a href="{{ url_for('auth.logout') }}"
-               class="{{ default_classes }}">Log Out</a>
-          </li>
+          <a href="{{ url_for('auth.logout') }}"
+            class="px-6 py-3 text-white bg-[#CE7BB0] rounded-full hover:bg-violet-400 hover:text-white-200 ">Log Out</a>
         {% endif %}
 
         {% if current_user.is_authenticated and current_user.is_admin %}
@@ -71,12 +54,10 @@
         {% endif %}
 
         {% if not current_user.is_authenticated %}
-          <li>
-            <a href="{{ url_for('auth.register') }}"
-               class="{{ default_classes }}">Register</a>
-          </li>
+          <a href="{{ url_for('auth.register') }}"
+            class="ml-6 px-6 py-3 text-white bg-[#CE7BB0] rounded-full hover:bg-violet-400 hover:text-white-200 ">Register</a>
         {% endif %}
-      </ul>
+     
     </div>
   </div>
 </nav>

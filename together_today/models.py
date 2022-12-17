@@ -33,12 +33,10 @@ class Profile(db.Model):
 
     first_name = db.Column(db.String(128))
     last_name = db.Column(db.String(128))
-    intro = db.Column(db.String(256))
     picture = db.Column(db.String(), nullable=True)
 
 
     user_id = db.Column(db.Integer, db.ForeignKey("users.id"), unique=True)
-    is_private = db.Column(db.Boolean, unique=False, default=False)
 
     def __repr__(self):
         return f"<Profile {self.last_name}>"
