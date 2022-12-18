@@ -1,7 +1,5 @@
 import os
 
-#EDIT uploads folder
-
 def strtobool(val):
     val = val.lower()
 

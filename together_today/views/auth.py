@@ -34,10 +34,11 @@ def login():
                 if nxt and nxt.startswith("/"):
                     return redirect(nxt)
 
+
                 return redirect(
                     url_for(
-                        "general.index",
-                        username=current_user.username,
+                        "profile.single_profile",
+                        username=username
                     )
                 )
 

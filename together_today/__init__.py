@@ -33,10 +33,11 @@ def create_app(config="together_today.config.Config"):
             return User.query.get(int(user_id))
 
         # pylint: disable=import-outside-toplevel
-        from together_today.views import general, auth
+        from together_today.views import general, auth, profile
 
         app.register_blueprint(general)
         app.register_blueprint(auth)
+        app.register_blueprint(profile)
        
 
     return app

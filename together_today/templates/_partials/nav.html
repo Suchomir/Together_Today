@@ -1,4 +1,5 @@
-<nav class="bg-[#A267AC] px-2 sm:px-4 py-3 rounded">
+
+<nav class="bg-[#A267AC] px-2 sm:px-4 py-3">
   <div class="container flex flex-wrap justify-between items-center mx-auto">
 
   
@@ -8,33 +9,37 @@
           T<img src="{{ url_for('static', filename='img/heart_icon.png') }}" alt="heart_icon.png" class="w-4 h-4 inline mx-0.5">day</span>
       </a>
   
+      {% if current_user.is_authenticated %}
+        <div class="">
+          <a href="{{ url_for('profile.single_profile', username=current_user.username) }}" class="flex items-center">
+            {% if current_user.profile.picture != "default.png" %}
+            <img class="mb-3 w-20 h-20 rounded-full shadow-lg inline"
+              src="{{ url_for('profile.profile_picture', filename= current_user.profile.picture ) }}"
+              alt="{{  current_user.username }} profile picture" />
+            {% else %}
+            <img class="mb-3 w-14 h-14 rounded-full shadow-lg inline" src="{{ url_for('static', filename='img/default.png') }}"
+              alt="{{  current_user.username }} profile picture">
+            {% endif %}
+
+            <span class="ml-3 font-medium font-serif">{{ current_user.username[0]|upper}}{{current_user.username[1:] }}</span>
+          </a>
+
+        </div>
+      {% endif %}
 
     <div class="hidden justify-between items-center w-full md:flex md:w-auto md:order-1" id="navbar-search">
   
       {% set active_classes='block py-2 pr-4 pl-3 text-white bg-red-700 rounded md:bg-transparent md:text-red-500 md:p-0' %}
       {% set default_classes='block py-2 pr-4 pl-3 text-gray-700 md:bg-transparent md:text-gray-700 md:hover:text-red-500 md:p-0' %}
 
-      
         {% if current_user.is_authenticated %}
-          <li>
-            <a href="#"
-               class="{{ active_classes if request.url_rule.endpoint == "profile.single_profile" else default_classes }}">
-              Your Profile
-            </a>
-          </li>
-        {% endif %}
-
-
-        {% if current_user.is_authenticated %}
-          <a href="{{ url_for('auth.logout') }}"
-            class="px-6 py-3 text-white bg-pink-300 rounded-full hover:bg-pink-400 hover:text-white-200 w-28 flex justify-center">Log Out</a>
-        {% endif %}
-
         <a href="{{ url_for('auth.logout') }}"
-          class="px-6 py-3 text-white bg-pink-300 rounded-full hover:bg-pink-400 hover:text-white-200 w-28 flex justify-center">Log
+            class="px-6 py-3 text-white bg-pink-300 rounded-full hover:bg-pink-400 hover:text-white-200 w-28 flex justify-center ml-5">Log
           Out</a>
+        {% endif %}
 
-
+        
+   
         {% if current_user.is_authenticated and current_user.is_admin %}
           <li>
             <button id="dropdown-navbar-link" data-dropdown-toggle="dropdown-navbar" class="{{ active_classes if request.url_rule.endpoint == 'admin.index' else default_classes }}">
@@ -46,16 +51,21 @@
                   <li>
                     <a href="{{ url_for('admin.index') }}" class="block py-2 px-4 hover:bg-gray-100">Dashboard</a>
                   </li>
-                  <li>
-                    <a href="{{ url_for('admin.reports') }}" class="block py-2 px-4 hover:bg-gray-100">Reports</a>
-                  </li>
                 </ul>
             </div>
         </li>
         {% endif %}
+
+        <button id="theme-toggle" type="button"
+          class="px-6 py-3 text-white bg-pink-300 rounded-full hover:bg-pink-400 hover:text-white-200 w-14 flex justify-center ml-5 border-4">
+          <i class="fa-solid fa-moon invisible" id="theme-toggle-dark-icon"></i>
+          <i class="fa-solid fa-sun invisible" id="theme-toggle-light-icon"></i>
+          </button>
 
      
      
     </div>
   </div>
 </nav>
+
+

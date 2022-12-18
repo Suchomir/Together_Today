@@ -7,6 +7,8 @@
 
 {% block content %}
   <div class="container mx-auto my-5 flex justify-center flex-col items-center">
+    
+    {% if not current_user.is_authenticated %}
     <h1 class="text-4xl text-center font-bold mt-24">Welcome to Together Today!</h1>
 
         <div class="bg-slate-100 w-2/5 h-4/5 mt-4 rounded-3xl mt-24 mb-10 border-8 border-solid border-rose-300 shadow-2xl">
@@ -18,19 +20,42 @@
           </div>
           
           <div class="place-self-end mb-10 flex justify-center">
-            {% if not current_user.is_authenticated %}
             <a href="{{ url_for('auth.login') }}"
               class="px-6 py-3 text-white bg-pink-300 rounded-full hover:bg-pink-400 hover:text-white-200 w-28 flex justify-center">Log In</a>
           
             <a href="{{ url_for('auth.register') }}"
               class="ml-6 px-6 py-3 text-white bg-pink-300 rounded-full hover:bg-pink-400 hover:text-white-200 w-28 flex justify-center">Register</a>
-            {% else %}
-              HEYOOO!
-            {% endif %}
-
+           
           </div>
         </div>
+        {% else %}
+          <p class="text-3xl flex justify-center font-semibold 
+            bg-gradient-to-r bg-clip-text  text-transparent 
+            from-rose-600 via-cyan-400 to-fuchsia-600
+            animate-text">Your special photo at 00:00 everyday!</p>
+
+          <p id="clock" class="text-5xl flex justify-center mt-2">00:00:00</p>
+
+            <img src="{{ url_for('static', filename='img/raccoon_index.jpg') }}" class="mt-4 w-2/6 h-2/6 border-8 border-solid border-rose-300 shadow-2xl flex justify-center"
+              alt="Raccoon Love <33" />
+
+            <div class="bg-white rounded-full mt-8 w-2/5 h-36 flex justify-center text-center items-center 
+            border-8 border-solid border-rose-300 shadow-2xl break-words">
+               <p class="text-lg italic font-serif">Text message</p>
+            </div>
+      {% endif %}
      
       
   </div>
+
+  <script>
+    var clock = document.getElementById("clock");
+
+    setInterval(() => {
+      fetch("{{ url_for('general.time_feed') }}")
+        .then(response => {
+          response.text().then(t => { clock.innerHTML = t })
+        });
+    }, 1000);  
+  </script>
 {% endblock %}
