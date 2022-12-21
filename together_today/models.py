@@ -41,3 +41,14 @@ class Profile(db.Model):
     def __repr__(self):
         return f"<Profile {self.last_name}>"
 
+class Photo_and_Message(db.Model):
+    __tablename__ = "photos_and_messages"
+
+    id = db.Column(db.Integer, primary_key=True)
+
+    photo_name = db.Column(db.String(128), nullable=True)
+    message = db.Column(db.String(256), nullable=True)
+
+    def __repr__(self):
+        return f"<Photo {self.message}>"
+

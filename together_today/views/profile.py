@@ -16,6 +16,7 @@ from flask_login import login_required, current_user
 
 from together_today.forms.profile import EditForm
 from together_today.utils.crypto import hash_password, verify_password
+from together_today.utils.decorators.admin import admin_required
 
 from together_today.models import db, Profile, User
 
@@ -116,7 +117,7 @@ def edit(profile_id):
 
 @profile_blueprint.route("/profile/<profile_id>/delete", methods=["DELETE"])
 @login_required
-#@admin_required
+@admin_required
 def delete_profile(profile_id):
     # delete_profile in reality deletes profile with the user and all the data
     profile = Profile.query.filter_by(id=profile_id).first_or_404()

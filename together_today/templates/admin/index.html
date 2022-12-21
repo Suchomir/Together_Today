@@ -1,0 +1,272 @@
+{% extends 'base.html' %}
+
+{% block title %}
+  Admin
+{% endblock %}
+
+{% block content %}
+  <div class="container mx-auto mt-5">
+    <h1 class="text-center font-bold">Hello {{ user.username }}!</h1>
+
+    <div class="overflow-x-auto relative shadow-md sm:rounded-lg mt-10">
+      <h1 class="text-center font-bold">Users</h1>
+      <table class="w-full text-sm text-center text-gray-500 mt-4">
+        <thead class="text-xs text-gray-700 uppercase bg-gray-50">
+        <tr>
+          <th scope="col" class="py-3 px-3">
+            ID
+          </th>
+
+          <th scope="col" class="py-3 px-3">
+            Username
+          </th>
+
+          <th scope="col" class="py-3 px-3">
+            Registered At
+          </th>
+
+          <th scope="col" class="py-3 px-3">
+            Admin
+          </th>
+
+          <th scope="col" class="py-3 px-3">
+            Edit
+          </th>
+
+          <th scope="col" class="py-3 px-3">
+            Delete
+          </th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for user in users %}
+          <tr class="bg-white border-b hover:bg-gray-50">
+            <th scope="row" class="py-4 px-3 font-medium text-gray-900 whitespace-nowrap">
+              {{ user.id }}
+            </th>
+            <td class="py-4 px-3">
+              {{ user.username }}
+            </td>
+            <td class="py-4 px-3">
+              {{ user.registered_at }}
+            </td>
+            <td class="py-4 px-3">
+              {% if user.is_admin %}
+                <button data-admin-url="{{ url_for('admin.toggle_admin', user_id=user.id) }}"
+                        class="inline-flex items-center py-2 px-4 text-sm font-medium text-gray-900 bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-red-700 focus:z-10 focus:ring-4 focus:outline-none focus:ring-gray-200 focus:text-red-700">
+                  Remove admin
+                  <i class="fa-solid fa-xmark ml-3"></i>
+                </button>
+              {% else %}
+                <button data-admin-url="{{ url_for('admin.toggle_admin', user_id=user.id) }}"
+                        class="inline-flex items-center py-2 px-4 text-sm font-medium text-gray-900 bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-green-700 focus:z-10 focus:ring-4 focus:outline-none focus:ring-gray-200 focus:text-red-700">
+                  Make admin
+                  <i class="fa-solid fa-check ml-3"></i>
+                </button>
+              {% endif %}
+            </td>
+
+            <td class="py-4 px-3">
+              <a href="{{ url_for('profile.edit', profile_id=user.profile.id) }}"
+                 class="inline-flex items-center py-2 px-4 text-sm font-medium text-gray-900 bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-yellow-500 focus:z-10 focus:ring-4 focus:outline-none focus:ring-gray-200 focus:text-yellow-500">
+                Edit <i class="fa-solid fa-pen ml-1.5"></i>
+              </a>
+            </td>
+
+            <td class="py-4 px-3">
+              <button data-profile-url="{{ url_for('profile.delete_profile', profile_id=user.profile.id) }}"
+                      class="inline-flex items-center py-2 px-4 text-sm font-medium text-gray-900 bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-red-700 focus:z-10 focus:ring-4 focus:outline-none focus:ring-gray-200 focus:text-red-700">
+                Delete <i class="fa-solid fa-xmark ml-3"></i>
+              </button>
+            </td>
+          </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+    </div>
+
+    <div class="overflow-x-auto relative shadow-md sm:rounded-lg mt-10">
+      <h1 class="text-center font-bold">Profiles</h1>
+      <table class="w-full text-sm text-center text-gray-500 mt-4">
+        <thead class="text-xs text-gray-700 uppercase bg-gray-50">
+        <tr>
+          <th scope="col" class="py-3 px-6">
+            ID
+          </th>
+
+          <th class="py-3 px-6">
+            First Name
+          </th>
+
+          <th class="py-3 px-6">
+            Last Name
+          </th>
+
+          <th class="py-3 px-6">
+            User
+          </th>
+
+          <th class="py-3 px-6">
+            Edit
+          </th>
+
+          <th class="py-3 px-6">
+            Delete
+          </th>
+        </tr>
+        </thead>
+        <tbody>
+
+        {% for profile in profiles %}
+          <tr class="bg-white border-b hover:bg-gray-50">
+            <th scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap ">
+              {{ profile.id }}
+            </th>
+            <td class="py-4 px-6">
+              {{ profile.first_name }}
+            </td>
+            <td class="py-4 px-6">
+              {{ profile.last_name }}
+            </td>
+            <td class="py-4 px-6">
+              {{ profile.user.username }}
+            </td>
+            <td class="py-4 px-6">
+              <a href="{{ url_for('profile.edit', profile_id=profile.id) }}"
+                 class="inline-flex items-center py-2 px-4 text-sm font-medium text-gray-900 bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-yellow-500 focus:z-10 focus:ring-4 focus:outline-none focus:ring-gray-200 focus:text-yellow-500">
+                Edit <i class="fa-solid fa-pen ml-1.5"></i></a>
+            </td>
+            <td class="py-4 px-6">
+              <button data-profile-url="{{ url_for('profile.delete_profile', profile_id=profile.id ) }}"
+                      class="inline-flex items-center py-2 px-4 text-sm font-medium text-gray-900 bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-red-700 focus:z-10 focus:ring-4 focus:outline-none focus:ring-gray-200 focus:text-red-700">
+                Delete <i class="fa-solid fa-xmark ml-3"></i>
+              </button>
+            </td>
+          </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+    </div>
+
+
+    <div class="overflow-x-auto relative shadow-md sm:rounded-lg mt-10">
+      <h1 class="text-center font-bold">Photos and Messages</h1>
+      <td class="py-4 px-6">
+        <a href="{{ url_for('admin.add_photo_message') }}"
+          class="inline-flex items-center py-2 px-4 text-sm font-medium text-gray-900 bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-green-700 focus:z-10 focus:ring-4 focus:outline-none focus:ring-gray-200 focus:text-yellow-500">
+          Add <i class="fa-sharp fa-solid fa-plus ml-1"></i></a>
+      </td>
+      <table class="w-full text-sm text-center text-gray-500 mt-4">
+        <thead class="text-xs text-gray-700 uppercase bg-gray-50">
+          <tr>
+            <th scope="col" class="py-3 px-6">
+              ID
+            </th>
+    
+            <th class="py-3 px-6">
+              Photo Name
+            </th>
+    
+            <th class="py-3 px-6">
+              Message
+            </th>
+    
+            <th class="py-3 px-6">
+              Edit
+            </th>
+    
+            <th class="py-3 px-6">
+              Delete
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+    
+          {% for photo_and_message in photos_and_messages %}
+          <tr class="bg-white border-b hover:bg-gray-50">
+            <th scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap ">
+              {{ photo_and_message.id }}
+            </th>
+            <td class="py-4 px-6">
+              {{ photo_and_message.photo_name }}
+            </td>
+            <td class="py-4 px-6">
+              {{ photo_and_message.message }}
+            </td>
+            <td class="py-4 px-6">
+              <a href="{{ url_for('admin.edit_photo_message', photo_message_id=photo_and_message.id) }}"
+                class="inline-flex items-center py-2 px-4 text-sm font-medium text-gray-900 bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-yellow-500 focus:z-10 focus:ring-4 focus:outline-none focus:ring-gray-200 focus:text-yellow-500">
+                Edit <i class="fa-solid fa-pen ml-1.5"></i></a>
+            </td>
+            <td class="py-4 px-6">
+              <button data-message-photo-url="{{ url_for('admin.delete_photo_message', photo_message_id=photo_and_message.id) }}"
+                class="inline-flex items-center py-2 px-4 text-sm font-medium text-gray-900 bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-red-700 focus:z-10 focus:ring-4 focus:outline-none focus:ring-gray-200 focus:text-red-700">
+                Delete <i class="fa-solid fa-xmark ml-3"></i>
+              </button>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+
+
+
+
+{% endblock %}
+
+{% block scripts %}
+  <script>
+    
+    const photoMesssageDeleteBtns = Array.from(document.querySelectorAll("[data-message-photo-url]"));
+    photoMesssageDeleteBtns.forEach(btn => {
+      btn.addEventListener("click", () => {
+        if (confirm("Do you really want to delete this photo and message connected to this photo?")) {
+          const url = btn.getAttribute("data-message-photo-url");
+
+          if (url !== "") {
+            fetch(url, {
+              method: "DELETE"
+            }).then(res => {
+              window.location.reload();
+            });
+          }
+        }
+      });
+    });
+
+    const profileDeleteBtns = Array.from(document.querySelectorAll("[data-profile-url]"));
+      profileDeleteBtns.forEach(btn => {
+        btn.addEventListener("click", () => {
+          if (confirm("Do you really want to delete this profile and user connected to this profile?")) {
+            const url = btn.getAttribute("data-profile-url");
+
+            if (url !== "") {
+              fetch(url, {
+                method: "DELETE"
+              }).then(res => {
+                window.location.reload();
+              });
+            }
+          }
+        });
+      });
+
+    const adminDeleteBtns = Array.from(document.querySelectorAll("[data-admin-url]"));
+    adminDeleteBtns.forEach(btn => {
+      btn.addEventListener("click", () => {
+        if (confirm("Do you really want to change admin status of this user?")) {
+          const url = btn.getAttribute("data-admin-url");
+
+          if (url !== "") {
+            fetch(url, {
+              method: "POST"
+            }).then(res => {
+              window.location.reload();
+            });
+          }
+        }
+      });
+    });
+  </script>
+{% endblock %}

@@ -59,6 +59,7 @@ class Config:
     )
 
     UPLOADS_FOLDER = os.path.join(BASE_DIR, "uploads", "profile_pictures")
+    PHOTOS_FOLDER = os.path.join(BASE_DIR, "uploads", "photos")
 
     SQLALCHEMY_DATABASE_URI = DATABASE_URL
     SQLALCHEMY_TRACK_MODIFICATIONS = bool_cast(
