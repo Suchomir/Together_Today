@@ -10,7 +10,6 @@ __pycache__/
 .Python
 build/
 develop-eggs/
-dist/
 downloads/
 eggs/
 .eggs/
@@ -86,7 +85,7 @@ node_modules
 *.db
 *.sqlite3
 .together_today_secret_key
-together_today/uploads/**/*
+
 
 #mine
 #notes.txt
