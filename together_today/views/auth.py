@@ -5,7 +5,7 @@ from flask import Blueprint, render_template, request, redirect, url_for, flash
 from flask_login import login_user, login_required, current_user, logout_user
 
 from together_today.forms.auth import RegisterForm, LoginForm
-from together_today.models import User, Profile, db
+from together_today.models import User, Profile, Register_Code ,db
 from together_today.utils.crypto import hash_password, verify_password
 
 auth_blueprint = Blueprint("auth", __name__)
@@ -62,14 +62,30 @@ def register():
             first_name = register_form.data["first_name"]
             last_name = register_form.data["last_name"]
             picture = register_form.data["picture"]
+            register_code = register_form.data["register_code"]
             password = hash_password(register_form.data["password"])
 
             username_taken = User.query.filter_by(username=username).first()
-            if username_taken:
-                flash("User with this username already exists", category="form_error")
+
+            is_valid_code = False
 
             if username_taken:
+                flash("User with this username already exists!", category="form_error")
                 return render_template("auth/register.html", form=register_form)
+
+            register_codes = Register_Code.query.all()
+
+            for valid_register_code in register_codes:
+                if register_code == valid_register_code.code:
+                    is_valid_code = True
+                    db.session.delete(valid_register_code)
+                    db.session.commit()
+                    break
+
+            if not is_valid_code:
+                flash("Wrong registration code!", category="form_error")
+                return render_template("auth/register.html", form=register_form)
+
 
             if picture:
                 extension = os.path.splitext(picture.filename)[1]

@@ -23,6 +23,8 @@ class RegisterForm(FlaskForm):
         validators=[DataRequired(), Length(min=8, max=64), EqualTo("password")],
     )
 
+    register_code = StringField("Registration code", validators=[DataRequired()])
+
     submit = SubmitField("Register")
 
 

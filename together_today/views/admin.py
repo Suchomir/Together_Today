@@ -1,10 +1,11 @@
 import uuid
 import os
+import secrets
 from flask import Blueprint, render_template, jsonify, request, flash, redirect, url_for
 from flask_login import login_required, current_user
 from flask import current_app as app
 
-from together_today.models import User, Profile, Photo_and_Message, db
+from together_today.models import User, Profile, Photo_and_Message, Register_Code ,db
 from together_today.utils.decorators.admin import admin_required
 from together_today.forms.photos_messages import AddForm, EditForm
 
@@ -18,14 +19,16 @@ def index():
     users = User.query.all()
     profiles = Profile.query.all()
     photos_and_messages = Photo_and_Message.query.all()
+    codes = Register_Code.query.all()
 
-
+ 
     return render_template(
         "admin/index.html",
         user=current_user,
         users=users,
         profiles=profiles,
-        photos_and_messages=photos_and_messages
+        photos_and_messages=photos_and_messages,
+        codes=codes
 
     )
 
@@ -85,6 +88,7 @@ def add_photo_message():
     
 @admin_blueprint.route("/admin/<photo_message_id>/edit_photo_message", methods=["GET", "POST"])
 @login_required
+@admin_required
 def edit_photo_message(photo_message_id):
     photo_and_message = Photo_and_Message.query.filter_by(id=photo_message_id).first_or_404()
 
@@ -119,9 +123,44 @@ def edit_photo_message(photo_message_id):
 @login_required
 @admin_required
 def delete_photo_message(photo_message_id):
-    # delete_profile in reality deletes profile with the user and all the data
     photo_and_message = Photo_and_Message.query.filter_by(id=photo_message_id).first_or_404()
     db.session.delete(photo_and_message)
+    db.session.commit()
+
+    return jsonify({"status": "OK"}), 200
+    
+
+@admin_blueprint.route("/admin/generate_code", methods=["GET"])
+@login_required
+@admin_required
+def generate_code():
+
+    generated_codes = Register_Code.query.all()
+    code = secrets.token_hex(4)
+
+    for generated_code in generated_codes:
+        if code == generated_code:
+            flash("Something went wrong with generating registration code! Try again.", category="error")
+            return redirect(url_for("admin.index"))
+
+    register_code = Register_Code(
+        code=code
+    )
+
+    
+    db.session.add_all([register_code])
+    db.session.commit()
+
+    flash("Successfully generated registration code!", category="success")
+    return redirect(url_for("admin.index"))
+
+
+@admin_blueprint.route("/admin/<code_id>/delete_code", methods=["DELETE"])
+@login_required
+@admin_required
+def delete_code(code_id):
+    register_code = Register_Code.query.filter_by(id=code_id).first_or_404()
+    db.session.delete(register_code)
     db.session.commit()
 
     return jsonify({"status": "OK"}), 200

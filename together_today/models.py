@@ -52,3 +52,16 @@ class Photo_and_Message(db.Model):
     def __repr__(self):
         return f"<Photo {self.message}>"
 
+
+class Register_Code(db.Model):
+    __tablename__ = "register_codes"
+
+    id = db.Column(db.Integer, primary_key=True)
+
+    code = db.Column(db.String(8), nullable=True)
+
+
+    def __repr__(self):
+        return f"<Code {self.code}>"
+
+
