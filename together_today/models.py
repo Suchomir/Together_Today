@@ -65,3 +65,15 @@ class Register_Code(db.Model):
         return f"<Code {self.code}>"
 
 
+class Image_Counter(db.Model):
+    __tablename__ = "image_counters"
+
+    id = db.Column(db.Integer, primary_key=True)
+
+    counter = db.Column(db.Integer, nullable=True)
+
+
+    def __repr__(self):
+        return f"<Counter {self.counter}>"
+
+
