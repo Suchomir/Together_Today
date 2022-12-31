@@ -36,14 +36,24 @@
 
           <p id="clock" class="text-5xl flex justify-center mt-2">00:00:00</p>
 
-            <img src="{{ url_for('static', filename='img/raccoon_index.jpg') }}" class="mt-4 w-2/6 h-2/6 border-8 border-solid border-rose-300 shadow-2xl flex justify-center rounded-md"
-              alt="Raccoon Love <33" />
+          {% if photo_and_message %}
+            <img src="{{ url_for('general.index_photo', filename=photo_and_message.photo_name ) }}" class="mt-4 w-2/6 h-2/6 border-8 border-solid border-rose-300 shadow-2xl flex justify-center rounded-md"
+              alt="Love photo <33" />
 
             <div class="bg-white rounded-full mt-8 w-2/5 h-36 flex justify-center text-center items-center 
             border-8 border-solid border-rose-300 shadow-2xl break-words">
-               <p class="text-lg italic font-serif p-4">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam vel mollis magna, sit amet tincidunt urna. Fusce
-              consequat dignissim enim id fringilla. Curabitur non commodo nisl. Sed iaculis diam sit amet est semper congue. Integer sodales cursus ipsum eu laoreet.</p>
+               <p class="text-lg italic font-serif p-4">{{ photo_and_message.message }}</p>
             </div>
+            {% else %}
+              <img src="{{ url_for('static', filename='img/raccoon_index.jpg') }}"
+                class="mt-4 w-2/6 h-2/6 border-8 border-solid border-rose-300 shadow-2xl flex justify-center rounded-md"
+                alt="Raccoon Love <33" />
+              
+              <div class="bg-white rounded-full mt-8 w-2/5 h-36 flex justify-center text-center items-center 
+                          border-8 border-solid border-rose-300 shadow-2xl break-words">
+                <p class="text-lg italic font-serif p-4">Już niedługo!</p>
+              </div>
+            {% endif %}
       {% endif %}
      
       
@@ -58,5 +68,18 @@
           response.text().then(t => { clock.innerHTML = t })
         });
     }, 1000);  
+    
+
+    setInterval(() => {
+        fetch("{{ url_for('general.check_for_photo') }}")
+          .then(response => {
+            if (response.status == 200) {
+              return 0;
+            } else {
+              window.location.reload();
+            }
+          });
+      }, 1000); 
+
   </script>
 {% endblock %}

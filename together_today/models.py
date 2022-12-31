@@ -50,7 +50,22 @@ class Photo_and_Message(db.Model):
     message = db.Column(db.String(256), nullable=True)
 
     def __repr__(self):
-        return f"<Photo {self.message}>"
+        return f"<Photo {self.id}>"
+
+
+
+class Current_Photo(db.Model):
+    __tablename__ = "current_photos"
+
+    id = db.Column(db.Integer, primary_key=True)
+
+    counter = db.Column(db.Integer, nullable=True)
+    current_photo = db.Column(db.String(128), nullable=True)
+    current_message = db.Column(db.String(256), nullable=True)
+
+
+    def __repr__(self):
+        return f"<Current photo ID {self.counter}>"
 
 
 class Register_Code(db.Model):
@@ -64,16 +79,5 @@ class Register_Code(db.Model):
     def __repr__(self):
         return f"<Code {self.code}>"
 
-
-class Image_Counter(db.Model):
-    __tablename__ = "image_counters"
-
-    id = db.Column(db.Integer, primary_key=True)
-
-    counter = db.Column(db.Integer, nullable=True)
-
-
-    def __repr__(self):
-        return f"<Counter {self.counter}>"
 
 

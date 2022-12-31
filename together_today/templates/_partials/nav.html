@@ -4,9 +4,9 @@
 
   
       <a href="{{ url_for('general.index') }}" class="flex items-center">
-        <img src="{{ url_for('static', filename='img/hearts_logo.png') }}" class="mr-3 h-6 sm:h-9" alt="Together Today Logo" />
-        <span class="self-center text-xl font-semibold ">T<img src="{{ url_for('static', filename='img/heart_icon.png') }}" alt="heart_icon.png" class="w-4 h-4 inline mx-0.5">gether 
-          T<img src="{{ url_for('static', filename='img/heart_icon.png') }}" alt="heart_icon.png" class="w-4 h-4 inline mx-0.5">day</span>
+        <img src="{{ url_for('static', filename='img/hearts_logo.png') }}" class="mr-3 h-12" alt="Together Today Logo" />
+        <span class="self-center font-semibold text-3xl">T<img src="{{ url_for('static', filename='img/heart_icon.png') }}" alt="heart_icon.png" class="w-6 h-6 inline mx-0.5">gether 
+          T<img src="{{ url_for('static', filename='img/heart_icon.png') }}" alt="heart_icon.png" class="w-6 h-6 inline mx-0.5">day</span>
       </a>
   
       {% if current_user.is_authenticated %}
