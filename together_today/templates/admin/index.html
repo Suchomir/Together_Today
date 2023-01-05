@@ -7,12 +7,59 @@
 {% block content %}
   <div class="container mx-auto mt-5">
     {% include "_partials/flashes.html" %}
-    <h1 class="text-center font-bold">Hello {{ user.username }}!</h1>
+    <h1 class="text-center font-bold dark:text-slate-200">Hello {{ user.username }}!</h1>
 
-    <div class="overflow-x-auto relative shadow-md sm:rounded-lg mt-10">
-      <h1 class="text-center font-bold">Users</h1>
+
+    <div class="overflow-x-auto relative shadow-md sm:rounded-lg mt-10 bg-slate-300 dark:bg-slate-500 pt-2">
+      <h1 class="text-center font-bold dark:text-white">Register Codes</h1>
+      <div class="grid justify-items-center">
+        <a href="{{ url_for('admin.generate_code') }}"
+          class="border-4 border-slate-400 inline-flex items-center py-2 px-4 text-sm font-medium text-gray-900 bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-green-700 focus:z-10 focus:ring-4 focus:outline-none focus:ring-gray-200 focus:text-yellow-500 mt-3">
+          Generate code <i class="fa-solid fa-dice ml-1"></i></a>
+      </div>
       <table class="w-full text-sm text-center text-gray-500 mt-4">
-        <thead class="text-xs text-gray-700 uppercase bg-gray-50">
+        <thead class="text-xs text-gray-700 uppercase bg-slate-200">
+          <tr>
+            <th scope="col" class="py-3 px-6">
+              ID
+            </th>
+    
+            <th class="py-3 px-6">
+              Code
+            </th>
+    
+            <th class="py-3 px-6">
+              Delete
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+    
+          {% for code in codes %}
+          <tr class="bg-white border-b ">
+            <th scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap bg-slate-300">
+              {{ code.id }}
+            </th>
+            <td class="py-4 px-6">
+              {{ code.code }}
+            </td>
+            <td class="py-4 px-6">
+              <button data-delete-code-url="{{ url_for('admin.delete_code', code_id=code.id ) }}"
+                class="inline-flex items-center py-2 px-4 text-sm font-medium text-gray-900 bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-red-700 focus:z-10 focus:ring-4 focus:outline-none focus:ring-gray-200 focus:text-red-700">
+                Delete <i class="fa-solid fa-xmark ml-3"></i>
+              </button>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+
+
+    <div class="overflow-x-auto relative shadow-md sm:rounded-lg mt-10 bg-slate-300 dark:bg-slate-500 pt-2">
+      <h1 class="text-center font-bold dark:text-white">Users</h1>
+      <table class="w-full text-sm text-center text-gray-500 mt-4">
+        <thead class="text-xs text-gray-700 uppercase bg-slate-200">
         <tr>
           <th scope="col" class="py-3 px-3">
             ID
@@ -41,7 +88,7 @@
         </thead>
         <tbody>
         {% for user in users %}
-          <tr class="bg-white border-b hover:bg-gray-50">
+          <tr class="bg-white border-b bg-slate-300">
             <th scope="row" class="py-4 px-3 font-medium text-gray-900 whitespace-nowrap">
               {{ user.id }}
             </th>
@@ -86,10 +133,10 @@
       </table>
     </div>
 
-    <div class="overflow-x-auto relative shadow-md sm:rounded-lg mt-10">
-      <h1 class="text-center font-bold">Profiles</h1>
+    <div class="overflow-x-auto relative shadow-md sm:rounded-lg mt-10 bg-slate-300 dark:bg-slate-500 pt-2">
+      <h1 class="text-center font-bold dark:text-white">Profiles</h1>
       <table class="w-full text-sm text-center text-gray-500 mt-4">
-        <thead class="text-xs text-gray-700 uppercase bg-gray-50">
+        <thead class="text-xs text-gray-700 uppercase bg-slate-200">
         <tr>
           <th scope="col" class="py-3 px-6">
             ID
@@ -119,8 +166,8 @@
         <tbody>
 
         {% for profile in profiles %}
-          <tr class="bg-white border-b hover:bg-gray-50">
-            <th scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap ">
+          <tr class="bg-white border-b bg-slate-300">
+            <th scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap">
               {{ profile.id }}
             </th>
             <td class="py-4 px-6">
@@ -150,15 +197,15 @@
     </div>
 
 
-    <div class="overflow-x-auto relative shadow-md sm:rounded-lg mt-10">
-      <h1 class="text-center font-bold">Photos and Messages</h1>
+    <div class="overflow-x-auto relative shadow-md sm:rounded-lg mt-10 mb-10 bg-slate-300 dark:bg-slate-500 pt-2">
+      <h1 class="text-center font-bold dark:text-white">Photos and Messages</h1>
      <div class="grid justify-items-center">
         <a href="{{ url_for('admin.add_photo_message') }}"
-          class="inline-flex items-center py-2 px-4 text-sm font-medium text-gray-900 bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-green-700 focus:z-10 focus:ring-4 focus:outline-none focus:ring-gray-200 focus:text-yellow-500 mt-3">
+          class="border-4 border-slate-400 inline-flex items-center py-2 px-4 text-sm font-medium text-gray-900 bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-green-700 focus:z-10 focus:ring-4 focus:outline-none focus:ring-gray-200 focus:text-yellow-500 mt-3">
           Add <i class="fa-sharp fa-solid fa-plus ml-1"></i></a>
       </div>
       <table class="w-full text-sm text-center text-gray-500 mt-4">
-        <thead class="text-xs text-gray-700 uppercase bg-gray-50">
+        <thead class="text-xs text-gray-700 uppercase bg-slate-200">
           <tr>
             <th scope="col" class="py-3 px-6">
               ID
@@ -184,7 +231,7 @@
         <tbody>
     
           {% for photo_and_message in photos_and_messages %}
-          <tr class="bg-white border-b hover:bg-gray-50">
+          <tr class="bg-white border-b bg-slate-300">
             <th scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap ">
               {{ photo_and_message.id }}
             </th>
@@ -210,54 +257,6 @@
         </tbody>
       </table>
     </div>
-
-
-    <div class="overflow-x-auto relative shadow-md sm:rounded-lg mt-10 mb-10">
-      <h1 class="text-center font-bold">Register Codes</h1>
-      <div class="grid justify-items-center">
-        <a href="{{ url_for('admin.generate_code') }}"
-          class="inline-flex items-center py-2 px-4 text-sm font-medium text-gray-900 bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-green-700 focus:z-10 focus:ring-4 focus:outline-none focus:ring-gray-200 focus:text-yellow-500 mt-3">
-          Generate code <i class="fa-solid fa-dice ml-1"></i></a>
-      </div>
-      <table class="w-full text-sm text-center text-gray-500 mt-4">
-        <thead class="text-xs text-gray-700 uppercase bg-gray-50">
-          <tr>
-            <th scope="col" class="py-3 px-6">
-              ID
-            </th>
-    
-            <th class="py-3 px-6">
-              Code
-            </th>
-    
-            <th class="py-3 px-6">
-              Delete
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-    
-          {% for code in codes %}
-          <tr class="bg-white border-b hover:bg-gray-50">
-            <th scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap ">
-              {{ code.id }}
-            </th>
-            <td class="py-4 px-6">
-              {{ code.code }}
-            </td>
-            <td class="py-4 px-6">
-              <button data-delete-code-url="{{ url_for('admin.delete_code', code_id=code.id ) }}"
-                class="inline-flex items-center py-2 px-4 text-sm font-medium text-gray-900 bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-red-700 focus:z-10 focus:ring-4 focus:outline-none focus:ring-gray-200 focus:text-red-700">
-                Delete <i class="fa-solid fa-xmark ml-3"></i>
-              </button>
-            </td>
-          </tr>
-          {% endfor %}
-        </tbody>
-      </table>
-    </div>
-
-
 
 {% endblock %}
 

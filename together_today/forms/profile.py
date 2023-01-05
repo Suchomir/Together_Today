@@ -4,9 +4,9 @@ from wtforms.validators import Email, Length, EqualTo, Optional
 
 
 class EditForm(FlaskForm):
-    first_name = StringField("First Name", validators=[Optional()])
-    last_name = StringField("Last Name", validators=[Optional()])
-    username = StringField("Username", validators=[Optional()])
+    first_name = StringField("First Name", validators=[Optional()], render_kw={"placeholder": "John"})
+    last_name = StringField("Last Name", validators=[Optional()], render_kw={"placeholder": "Doe"})
+    username = StringField("Username", validators=[Optional()], render_kw={"placeholder": "PussyDestroyer69"})
     picture = FileField("Picture", validators=[Optional()])
 
     new_password = PasswordField(

@@ -14,9 +14,9 @@
         {{ form.hidden_tag() }}
 
         <div class="mt-4">
-          {{ form.first_name.label(class="block mb-2 text-sm font-medium text-gray-900") }}
-          {{ form.first_name(class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg
-                focus:ring-red-500 focus:border-red-500 block w-full p-2.5" ) }}
+          {{ form.first_name.label(class="block mb-2 text-sm font-medium text-gray-900 dark:text-white") }}
+          {{ form.first_name(class="bg-gray-50 border-4 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500
+                focus:border-red-500 block w-full p-2.5 dark:bg-slate-400 dark:border-slate-500 dark:text-white" ) }}
 
 
           {% for error in form.first_name.errors %}
@@ -25,9 +25,9 @@
         </div>
 
         <div class="mt-4">
-          {{ form.last_name.label(class="block mb-2 text-sm font-medium text-gray-900") }}
-          {{ form.last_name(class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg
-                focus:ring-red-500 focus:border-red-500 block w-full p-2.5") }}
+          {{ form.last_name.label(class="block mb-2 text-sm font-medium text-gray-900 dark:text-white") }}
+          {{ form.last_name(class="bg-gray-50 border-4 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500
+                focus:border-red-500 block w-full p-2.5 dark:bg-slate-400 dark:border-slate-500 dark:text-white") }}
 
           {% for error in form.last_name.errors %}
             <p class="mt-2 text-sm text-red-600">{{ error }}</p>
@@ -35,9 +35,9 @@
         </div>
 
         <div class="mt-4">
-          {{ form.username.label(class="block mb-2 text-sm font-medium text-gray-900") }}
-          {{ form.username(class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg
-                focus:ring-red-500 focus:border-red-500 block w-full p-2.5") }}
+          {{ form.username.label(class="block mb-2 text-sm font-medium text-gray-900 dark:text-white") }}
+          {{ form.username(class="bg-gray-50 border-4 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500
+                focus:border-red-500 block w-full p-2.5 dark:bg-slate-400 dark:border-slate-500 dark:text-white") }}
 
           {% for error in form.username.errors %}
             <p class="mt-2 text-sm text-red-600">{{ error }}</p>
@@ -45,9 +45,9 @@
         </div>
 
         <div class="mt-4">
-          {{ form.picture.label(class="block mb-2 text-sm font-medium text-gray-900") }}
-          {{ form.picture(class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500
-          focus:border-red-500 block w-full p-2.5") }}
+          {{ form.picture.label(class="block mb-2 text-sm font-medium text-gray-900 dark:text-white") }}
+          {{ form.picture(class="bg-gray-50 border-4 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500
+          focus:border-red-500 block w-full p-2.5 dark:bg-slate-400 dark:border-slate-500 dark:text-white") }}
         
           {% for error in form.picture.errors %}
           <p class="mt-2 text-sm text-red-600">{{ error }}</p>
@@ -56,9 +56,9 @@
 
 
         <div class="mt-4">
-          {{ form.new_password.label(class="block mb-2 text-sm font-medium text-gray-900") }}
-          {{ form.new_password(class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg
-                focus:ring-red-500 focus:border-red-500 block w-full p-2.5") }}
+          {{ form.new_password.label(class="block mb-2 text-sm font-medium text-gray-900 dark:text-white") }}
+          {{ form.new_password(class="bg-gray-50 border-4 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500
+                focus:border-red-500 block w-full p-2.5 dark:bg-slate-400 dark:border-slate-500 dark:text-white") }}
 
           {% for error in form.new_password.errors %}
             <p class="mt-2 text-sm text-red-600">{{ error }}</p>
@@ -66,9 +66,9 @@
         </div>
 
         <div class="mt-4">
-          {{ form.confirm_password.label(class="block mb-2 text-sm font-medium text-gray-900") }}
-          {{ form.confirm_password(class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg
-                focus:ring-red-500 focus:border-red-500 block w-full p-2.5") }}
+          {{ form.confirm_password.label(class="block mb-2 text-sm font-medium text-gray-900 dark:text-white") }}
+          {{ form.confirm_password(class="bg-gray-50 border-4 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500
+                focus:border-red-500 block w-full p-2.5 dark:bg-slate-400 dark:border-slate-500 dark:text-white") }}
 
           {% for error in form.confirm_password.errors %}
             <p class="mt-2 text-sm text-red-600">{{ error }}</p>
@@ -76,8 +76,10 @@
         </div>
 
         <div class="mt-4">
-          {{ form.submit (class="w-full text-white bg-violet-400 hover:bg-violet-500 focus:ring-4 focus:outline-none focus:ring-violet-300 font-medium
-          rounded-lg text-sm w-full px-5 py-2.5 text-center cursor-pointer") }}
+          {{ form.submit (class="w-full text-white bg-violet-400 hover:bg-violet-500 focus:ring-4
+          focus:outline-none focus:ring-violet-300 dark:focus:ring-slate-400 font-medium rounded-lg text-sm w-full px-5 py-2.5
+          text-center
+          cursor-pointer dark:bg-slate-800 dark:hover:bg-slate-900") }}
         </div>
       </form>
 

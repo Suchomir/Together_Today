@@ -9,22 +9,20 @@
   <div class="container mx-auto my-5 flex justify-center flex-col items-center"> 
     
     {% if not current_user.is_authenticated %}
-    <h1 class="text-4xl text-center font-bold mt-24">Welcome to Together Today!</h1>
+    <h1 class="text-4xl text-center font-bold mt-24 dark:text-slate-200">Welcome to Together Today!</h1>
 
-        <div class="bg-slate-100 w-2/5 h-4/5 mt-4 rounded-3xl mt-24 mb-10 border-8 border-solid border-purple-300 hover:border-purple-400 shadow-2xl">
+        <div class="bg-white w-2/5 h-4/5 mt-4 rounded-3xl mt-24 mb-10 border-8 border-solid border-purple-400 dark:border-slate-600 shadow-2xl dark:bg-slate-400">
           
           <div class="mt-3 flex justify-center">
-            <div>
-              <img src="{{ url_for('static', filename='img/raccoon_index.jpg') }}" class="rounded-full w-72 mb-10" alt="Raccoon Love <33" />
-            </div>
+              <img src="{{ url_for('static', filename='img/raccoon_index.jpg') }}" class="rounded-full w-72 mb-10 border-4 border-white dark:border-slate-100" alt="Raccoon Love <33" />
           </div>
           
           <div class="place-self-end mb-10 flex justify-center">
             <a href="{{ url_for('auth.login') }}"
-              class="px-6 py-3 text-white bg-pink-300 rounded-full hover:bg-pink-400 hover:text-white-200 w-28 flex justify-center">Log In</a>
+              class="px-6 py-3 border-4  text-white  bg-pink-300 rounded-full hover:bg-pink-400 hover:text-white-200 w-28 flex justify-center dark:bg-slate-600 dark:hover:bg-slate-700">Log In</a>
           
             <a href="{{ url_for('auth.register') }}"
-              class="ml-6 px-6 py-3 text-white bg-pink-300 rounded-full hover:bg-pink-400 hover:text-white-200 w-28 flex justify-center">Register</a>
+              class="ml-6 px-6 py-3 border-4 text-white  bg-pink-300 rounded-full hover:bg-pink-400 hover:text-white-200 w-28 flex justify-center dark:bg-slate-600 dark:hover:bg-slate-700">Register</a>
            
           </div>
         </div>
@@ -34,24 +32,24 @@
             from-rose-600 via-cyan-400 to-fuchsia-600
             animate-text pb-1">Your special photo at 00:00 everyday!</p>
 
-          <p id="clock" class="text-5xl flex justify-center mt-2">00:00:00</p>
+          <p id="clock" class="text-5xl flex justify-center mt-2 dark:text-slate-200">00:00:00</p>
 
           {% if photo_and_message %}
-            <img src="{{ url_for('general.index_photo', filename=photo_and_message.photo_name ) }}" class="mt-4 w-2/6 h-2/6 border-8 border-solid border-purple-300 hover:border-purple-400 shadow-2xl flex justify-center rounded-md"
+            <img src="{{ url_for('general.index_photo', filename=photo_and_message.photo_name ) }}" class="mt-4 w-2/6 h-2/6 border-8 border-solid border-purple-400 shadow-2xl flex justify-center rounded-md dark:border-slate-600"
               alt="Love photo <33" />
 
             <div class="bg-white rounded-full mt-8 w-2/5 h-36 flex justify-center text-center items-center 
-            border-8 border-solid border-purple-300 hover:border-purple-400 shadow-2xl break-words">
+            border-8 border-solid border-purple-400 shadow-2xl break-words dark:border-slate-600">
                <p class="text-lg italic font-serif p-4">{{ photo_and_message.message }}</p>
             </div>
             {% else %}
               <img src="{{ url_for('static', filename='img/raccoon_index.jpg') }}"
-                class="mt-4 w-2/6 h-2/6 border-8 border-solid border-purple-300 hover:border-purple-400 shadow-2xl flex justify-center rounded-md"
+                class="mt-4 w-2/6 h-2/6 border-8 border-solid border-purple-400 shadow-2xl flex justify-center rounded-md dark:border-slate-600"
                 alt="Raccoon Love <33" />
               
               <div class="bg-white rounded-full mt-8 w-2/5 h-36 flex justify-center text-center items-center 
-                          border-8 border-solid border-purple-300 hover:border-purple-400 shadow-md break-words">
-                <p class="text-lg italic font-serif p-4">Już niedługo!</p>
+                          border-8 border-solid border-purple-400 shadow-md break-words dark:bg-slate-200 dark:border-slate-600">
+                <p class="text-lg italic font-serif p-4 dark:bg-slate-200">Już niedługo!</p>
               </div>
             {% endif %}
       {% endif %}
@@ -59,6 +57,7 @@
       
   </div>
 
+  {% if current_user.is_authenticated %}
   <script>
     var clock = document.getElementById("clock");
 
@@ -82,4 +81,6 @@
       }, 1000); 
 
   </script>
+  {% endif %}
+
 {% endblock %}

@@ -60,12 +60,13 @@ class Current_Photo(db.Model):
     id = db.Column(db.Integer, primary_key=True)
 
     counter = db.Column(db.Integer, nullable=True)
+    current_date = db.Column(db.String(128), nullable=True)
     current_photo = db.Column(db.String(128), nullable=True)
     current_message = db.Column(db.String(256), nullable=True)
 
 
     def __repr__(self):
-        return f"<Current photo ID {self.counter}>"
+        return f"<Current photo ID {self.current_date}>"
 
 
 class Register_Code(db.Model):
