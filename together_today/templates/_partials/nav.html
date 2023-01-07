@@ -25,7 +25,7 @@
       {% endif %}
 
       <button data-collapse-toggle="navbar-default" type="button"
-        class="inline-flex items-center p-2 ml-3 rounded-md md:hidden text-pink-100 bg-pink-300 hover:bg-pink-400"
+        class="inline-flex items-center p-2 ml-3 rounded-md md:hidden text-pink-100 bg-pink-300 hover:bg-pink-400 dark:bg-slate-600 dark:text-slate-100 dark:hover:bg-slate-700"
         aria-controls="navbar-default" aria-expanded="false">
 
         <span class="sr-only">Open main menu</span>
@@ -40,7 +40,7 @@
 
     
           <ul
-            class="flex flex-col md:flex-row md:bg-purple-300 dark:bg-slate-800">
+            class="flex flex-col md:flex-row dark:bg-slate-800">
 
             {% if current_user.is_authenticated %}
             <li class="my-2">
