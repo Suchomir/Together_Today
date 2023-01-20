@@ -124,6 +124,8 @@ def edit_photo_message(photo_message_id):
 @admin_required
 def delete_photo_message(photo_message_id):
     photo_and_message = Photo_and_Message.query.filter_by(id=photo_message_id).first_or_404()
+    photo_name = photo_and_message.photo_name
+    os.remove(os.path.join(app.config["PHOTOS_FOLDER"], photo_name))
     db.session.delete(photo_and_message)
     db.session.commit()
 
