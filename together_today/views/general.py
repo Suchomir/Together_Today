@@ -39,13 +39,13 @@ def check_for_photo():
 
         if days_difference.days != 0:
                 photo_and_message = Photo_and_Message.query.filter_by(id=photo_date_db.counter+days_difference.days).first()
-        if photo_and_message:
-                photo_date_db.current_photo = photo_and_message.photo_name
-                photo_date_db.message = photo_and_message.message
-                photo_date_db.counter += days_difference.days
-                photo_date_db.current_date = str(current_date)
-                db.session.commit()
-                new_photo = True
+                if photo_and_message != None:
+                        photo_date_db.current_photo = photo_and_message.photo_name
+                        photo_date_db.message = photo_and_message.message
+                        photo_date_db.counter += days_difference.days
+                        photo_date_db.current_date = str(current_date)
+                        db.session.commit()
+                        new_photo = True
 
         if new_photo:
                 return jsonify({"status": "Accepted"}), 202
