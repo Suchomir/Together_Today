@@ -96,6 +96,9 @@ def edit(profile_id):
                     profile.user.password = hash_password(new_password)
 
                 if picture:
+                    photo_name = profile.picture
+                    if photo_name != "default.png":
+                        os.remove(os.path.join(app.config["UPLOADS_FOLDER"], photo_name))
                     extension = os.path.splitext(picture.filename)[1]
                     picture_name = f"{uuid.uuid4()}{extension}"
                     picture.save(
@@ -133,6 +136,8 @@ def delete_profile_picture(profile_id):
     profile = Profile.query.filter_by(id=profile_id).first_or_404()
 
     if current_user == profile.user:
+        photo_name = profile.picture
+        os.remove(os.path.join(app.config["UPLOADS_FOLDER"], photo_name))
         profile.picture = "default.png"
         db.session.commit()
         return jsonify({"status": "OK"}), 200
