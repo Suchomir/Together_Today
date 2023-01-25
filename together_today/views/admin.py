@@ -103,6 +103,8 @@ def edit_photo_message(photo_message_id):
                 message = edit_form.data["message"]
 
                 if photo:
+                    photo_name = photo_and_message.photo_name
+                    os.remove(os.path.join(app.config["PHOTOS_FOLDER"], photo_name))
                     extension = os.path.splitext(photo.filename)[1]
                     photo_name = f"{uuid.uuid4()}{extension}"
                     photo.save(os.path.join(app.config["PHOTOS_FOLDER"], photo_name))
