@@ -9,8 +9,9 @@ general_blueprint = Blueprint("general", __name__)
 @general_blueprint.route("/", methods=["GET"])
 def index():
         current_photo = Current_Photo.query.filter_by(id=1).first()
-        photo_and_message = Photo_and_Message.query.filter_by(id=current_photo.counter).first()
-        if current_photo.counter == 0:
+        if current_photo:
+                photo_and_message = Photo_and_Message.query.filter_by(id=current_photo.counter).first()
+        if not current_photo or current_photo.counter == 0:
                 return render_template("general/index.html")
         else:
                 return render_template("general/index.html", photo_and_message=photo_and_message)
